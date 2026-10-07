@@ -1,0 +1,1100 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cargá lo que tenés en el campo y mirá si conviene vender ahora, esperar o cubrir con futuros: soja, maíz, trigo y girasol, con la pizarra de Rosario y los futuros de A3.">
+<title>¿Vendo o guardo? — Lectura diaria del mercado de granos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1EFE4;
+    --bg-panel: #FBFAF2;
+    --ink: #1E2A1F;
+    --ink-soft: #57624F;
+    --green: #2F5233;
+    --green-soft: #E4EADD;
+    --gold: #B8860E;
+    --gold-soft: #F3E7C4;
+    --rust: #A8432B;
+    --rust-soft: #F2DFD5;
+    --border: #D9D3BE;
+    --up: #3C6E3F;
+    --down: #A8432B;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14170F;
+      --bg-panel: #1B1F15;
+      --ink: #ECE7D6;
+      --ink-soft: #AFA98F;
+      --green: #7FA383;
+      --green-soft: #23301F;
+      --gold: #E0B84A;
+      --gold-soft: #332A0F;
+      --rust: #E0785C;
+      --rust-soft: #34201A;
+      --border: #333827;
+      --up: #8CBF8E;
+      --down: #E0785C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14170F;
+    --bg-panel: #1B1F15;
+    --ink: #ECE7D6;
+    --ink-soft: #AFA98F;
+    --green: #7FA383;
+    --green-soft: #23301F;
+    --gold: #E0B84A;
+    --gold-soft: #332A0F;
+    --rust: #E0785C;
+    --rust-soft: #34201A;
+    --border: #333827;
+    --up: #8CBF8E;
+    --down: #E0785C;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    min-height: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  /* ---------- header ---------- */
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+  }
+  .updated {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  h1.hero {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.08;
+    margin: 6px 0 8px;
+    max-width: 14ch;
+  }
+  p.hero-sub {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+
+  /* ---------- pizarra ticker ---------- */
+  .pizarra {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    border-radius: 4px;
+    margin-bottom: 30px;
+  }
+  .pizarra-item {
+    flex: 1 0 140px;
+    padding: 14px 18px;
+    border-right: 1px solid var(--border);
+  }
+  .pizarra-item:last-child { border-right: none; }
+  .pizarra-name {
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .pizarra-price {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .pizarra-delta {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  .pizarra-delta.up { color: var(--up); }
+  .pizarra-delta.down { color: var(--down); }
+  .pizarra-year {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+  .pizarra-year.up { color: var(--up); }
+  .pizarra-year.down { color: var(--down); }
+
+  /* ---------- layout: form + resultado ---------- */
+  .panels {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 22px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .panels { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    border-radius: 4px;
+    padding: 22px;
+  }
+  .panel h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 0 0 4px;
+  }
+  .panel .panel-sub {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    line-height: 1.45;
+  }
+
+  label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin: 14px 0 6px;
+  }
+  label:first-of-type { margin-top: 0; }
+  select, input[type="number"] {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  select:focus, input:focus, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+  .field-hint {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  button.submit {
+    margin-top: 20px;
+    width: 100%;
+    background: var(--green);
+    color: var(--bg-panel);
+    border: none;
+    border-radius: 3px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 13px 16px;
+    cursor: pointer;
+  }
+  button.submit:hover { opacity: 0.92; }
+
+  .saved-note {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+  .saved-note button {
+    background: none;
+    border: none;
+    color: var(--rust);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.76rem;
+    padding: 0;
+    font-family: var(--font-body);
+  }
+
+  /* ---------- resultado ---------- */
+  .result-empty {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    padding: 10px 0 4px;
+  }
+  .result-card {
+    display: none;
+  }
+  .result-card.show { display: block; }
+  .verdict {
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .verdict.vender { background: var(--gold-soft); }
+  .verdict.esperar { background: var(--green-soft); }
+  .verdict.completo { background: var(--green-soft); }
+  .verdict.consultar { background: var(--rust-soft); }
+  .verdict-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    margin: 0 0 6px;
+  }
+  .verdict.vender .verdict-label { color: var(--gold); }
+  .verdict.esperar .verdict-label { color: var(--green); }
+  .verdict.completo .verdict-label { color: var(--green); }
+  .verdict.consultar .verdict-label { color: var(--rust); }
+  .verdict-sub {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .why-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 4px 0 8px;
+  }
+  ul.reasons {
+    margin: 0 0 4px;
+    padding-left: 18px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  ul.reasons li { margin-bottom: 6px; }
+  .disclaimer-inline {
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+    padding-top: 12px;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ---------- contexto ---------- */
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    margin-top: 4px;
+  }
+  table.compare th, table.compare td {
+    text-align: left;
+    padding: 7px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.compare th {
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: 0.76rem;
+  }
+  table.compare tr.best td { font-weight: 600; color: var(--gold); }
+  table.compare tr.na td { color: var(--ink-soft); font-style: italic; }
+  .compare-fuente {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .instrumentos {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    padding-top: 26px;
+  }
+  .instrumentos h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0 0 14px;
+  }
+  .instrumentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+  }
+  .instrumento-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    background: var(--bg-panel);
+  }
+  .instrumento-card h3 {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .instrumento-card p {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .contexto {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    padding-top: 26px;
+  }
+  .contexto h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0 0 12px;
+  }
+  .contexto p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 68ch;
+    margin: 0 0 12px;
+  }
+  .contexto p:last-child { margin-bottom: 0; }
+
+  .sugerencias {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    padding-top: 26px;
+  }
+  .sugerencias h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0 0 10px;
+  }
+  .sugerencias p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  button.comment-btn {
+    background: var(--gold);
+    color: var(--bg-panel);
+    border: none;
+    border-radius: 3px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+  button.comment-btn:hover { opacity: 0.92; }
+  p.comment-fallback {
+    font-size: 0.82rem;
+    font-style: italic;
+  }
+
+  footer.foot {
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="brand">Pizarra &amp; Decisión · Granos</span>
+    <span class="updated" id="updatedLabel"></span>
+  </header>
+
+  <h1 class="hero">¿Vendo o guardo?</h1>
+  <p class="hero-sub">Cargá lo que tenés en tu campo y te decimos, en criollo, si conviene vender ahora, esperar, o vender una parte — con el porqué.</p>
+
+  <div class="pizarra" id="pizarra"></div>
+
+  <div class="panels">
+    <section class="panel">
+      <h2>Tu situación</h2>
+      <p class="panel-sub">Con estos datos armamos la recomendación. Solo quedan guardados en este navegador.</p>
+
+      <label for="cultivo">Cultivo</label>
+      <select id="cultivo"></select>
+
+      <label for="estado">Estado de tu mercadería</label>
+      <select id="estado">
+        <option value="cosechada">Ya cosechada — en silo o en planta</option>
+        <option value="campo">Todavía en el campo (cosecha pendiente)</option>
+      </select>
+      <div class="field-hint">Si todavía no cosechaste (aunque recién estés sembrando), no podés vender contado — pero sí fijar precio con un futuro de cosecha nueva.</div>
+
+      <div id="ventanaWrap" style="display:none;">
+        <label for="ventana">¿Cuándo esperás cosechar?</label>
+        <select id="ventana"></select>
+        <div class="field-hint" id="calendarioHint"></div>
+      </div>
+
+      <label for="disponible">Toneladas disponibles (total de tu cosecha)</label>
+      <input type="number" id="disponible" min="0" step="1" placeholder="Ej: 800">
+      <div class="field-hint">Lo que tenés en el campo o en silo, vendido o no.</div>
+
+      <label for="comprometido">Toneladas ya vendidas o comprometidas</label>
+      <input type="number" id="comprometido" min="0" step="1" placeholder="Ej: 300">
+      <div class="field-hint">Fijado, forward o entregado — lo que ya no es tuyo para decidir.</div>
+
+      <label for="objetivo">Precio objetivo en US$/t (opcional)</label>
+      <input type="number" id="objetivo" min="0" step="1" placeholder="Ej: 320">
+      <div class="field-hint">Si tenés un número en la cabeza, te avisamos cuando el mercado lo toque.</div>
+
+      <button class="submit" id="calcBtn">Ver mi recomendación</button>
+      <div class="saved-note" id="savedNote" style="display:none;">
+        Usando tus datos guardados. <button id="clearBtn">Borrar y cargar de nuevo</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recomendación de hoy</h2>
+      <p class="panel-sub">Se arma con reglas simples sobre los datos de mercado y lo que cargaste al lado.</p>
+
+      <div class="result-empty" id="resultEmpty">Completá tu situación y tocá «Ver mi recomendación» para verla acá.</div>
+
+      <div class="result-card" id="resultCard">
+        <div class="verdict" id="verdict">
+          <p class="verdict-label" id="verdictLabel"></p>
+          <p class="verdict-sub" id="verdictSub"></p>
+        </div>
+        <p class="why-title">Por qué</p>
+        <ul class="reasons" id="reasons"></ul>
+
+        <p class="why-title">Comparación de precios</p>
+        <table class="compare" id="compareTable"></table>
+
+        <div class="disclaimer-inline">Esto no es asesoramiento financiero ni una garantía de precio. Los precios de forward y futuro no incluyen flete, comisión ni márgenes de garantía — confirmalos con tu corredor antes de cerrar. La decisión final es tuya.</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="instrumentos">
+    <h2>Formas de vender</h2>
+    <div class="instrumentos-grid">
+      <div class="instrumento-card">
+        <h3>Contado / disponible</h3>
+        <p>Vendés la mercadería que ya tenés cosechada y cobrás ahora, al precio de pizarra de hoy.</p>
+      </div>
+      <div class="instrumento-card">
+        <h3>Forward</h3>
+        <p>Acordás hoy un precio con el comprador para entregar la mercadería en una fecha futura, aunque todavía no la hayas cosechado.</p>
+      </div>
+      <div class="instrumento-card">
+        <h3>Futuro (Matba-Rofex / Chicago)</h3>
+        <p>Fijás un precio de referencia en el mercado de futuros, sin necesidad de tener la mercadería lista todavía. Elegí un vencimiento posterior a tu cosecha.</p>
+      </div>
+      <div class="instrumento-card">
+        <h3>Opción (PUT)</h3>
+        <p>Pagás una prima a tu corredor para asegurarte un precio mínimo, conservando la chance de vender más caro si el mercado sube.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contexto">
+    <h2>Cómo está el mercado hoy</h2>
+    <p id="contextoTexto"></p>
+  </div>
+
+  <div class="sugerencias" id="sugerenciasSeccion">
+    <h2>¿Qué dato te gustaría encontrar acá?</h2>
+    <p>Esta app se va completando con lo que piden los productores que la usan. Si te falta un cultivo, un mercado, un dato de tu zona o cualquier otra cosa, dejalo en los comentarios de mis videos de TikTok.</p>
+  </div>
+
+  <footer class="foot">
+    <span id="footUpdated"></span> — contado: Cámara Arbitral de Cereales (BCR), pizarra física de Rosario. Futuros: A3 Mercados (vía Bolsa de Cereales de Buenos Aires y AFA Diario), con la fecha de cierre indicada arriba. Calendario de siembra y cosecha: rangos generales de Argentina (AgroSpray, Infoagro, Climate FieldView); cambian según la zona y la fecha de siembra. Comparación con hace un año: contado BCR de septiembre de 2025 (maíz y trigo). La referencia de precio es la pizarra anterior confirmada (21-sep) y se va completando con cada actualización. El girasol cotiza con valor estimativo y el forward se negocia caso a caso, por eso no tienen recomendación automática. Confirmá siempre con tu corredor antes de operar.
+  </footer>
+</div>
+
+<script>
+/* =====================================================================
+   DATOS DE MERCADO — EDITAR ACÁ (actualización diaria)
+   Para actualizar cada día:
+   1) ACTUALIZADO y FECHA_DATOS: fecha de hoy y de las fuentes.
+   2) historico: agregar al FINAL de cada cultivo la pizarra nueva
+      { f: "AAAA-MM-DD", usd: precio }. La última es "hoy"; las anteriores
+      (hasta 30 días atrás) se promedian como referencia.
+   3) futuros: reemplazar la curva de A3 (posición "mmm-aa" y precio US$/t).
+   Fuentes: contado = Cámara Arbitral de Cereales (BCR),
+   www.cac.bcr.com.ar/es/precios-de-pizarra — pizarra del 5-oct-2026
+   (publicada 6-oct 10:12hs, TC BNA comprador $1.511).
+   Futuros = A3 Mercados (Matba-Rofex), cierre del 5-oct-2026 según la Bolsa de
+   Cereales de Bs. As. (columna "Anterior" coincide con el cierre del 2-oct que
+   aún muestra AFA Diario).
+   Calendario: rangos GENERALES para Argentina (AgroSpray, Infoagro, Climate
+   FieldView). No encontré fechas por zona en fuentes públicas: la app le
+   pregunta al productor cuándo espera cosechar.
+   Girasol: pizarra ESTIMATIVA (E) y sin futuro en US$ público: sin
+   recomendación firme. Forward: se negocia caso a caso, sin cotización.
+   ===================================================================== */
+const ACTUALIZADO = "7 de octubre de 2026 — contado: pizarra CAC-BCR del 5-oct (sin pizarra nueva publicada); futuros: A3, cierre del 5-oct.";
+const FECHA_DATOS = "2026-10-05";   // fecha de la pizarra (mes de referencia del calendario)
+const FUENTE_FUTUROS = "A3, cierre 5-oct-2026";
+const MAX_MESES = 12;               // no se muestran futuros a más de 12 meses
+
+const WASDE = "El informe WASDE de octubre (USDA) suele salir en la segunda semana del mes y puede mover el precio.";
+
+const MERCADO = {
+  soja: {
+    nombre: "Soja",
+    estimativo: false,
+    historico: [ { f: "2026-09-21", usd: 372.09 }, { f: "2026-10-05", usd: 365.65 } ],
+    anio_anterior_usd: null,
+    contado_fuente: "CAC-BCR, pizarra 5-oct-2026",
+    futuros: [
+      { posicion: "oct-26", usd: 367 }, { posicion: "nov-26", usd: 370.5 }, { posicion: "ene-27", usd: 375.5 },
+      { posicion: "may-27", usd: 356.8 }, { posicion: "jul-27", usd: 363.4 }, { posicion: "sep-27", usd: 367.5 },
+    ],
+    ref_nueva: "may-27",
+    evento_proximo: WASDE,
+  },
+  maiz: {
+    nombre: "Maíz",
+    estimativo: false,
+    historico: [ { f: "2026-09-21", usd: 198.67 }, { f: "2026-10-05", usd: 190 } ],
+    anio_anterior_usd: 177, // contado BCR, sep-2025
+    contado_fuente: "CAC-BCR, pizarra 5-oct-2026",
+    futuros: [
+      { posicion: "oct-26", usd: 195 }, { posicion: "nov-26", usd: 196 }, { posicion: "dic-26", usd: 204 },
+      { posicion: "ene-27", usd: 201.5 }, { posicion: "feb-27", usd: 203 }, { posicion: "mar-27", usd: 201.5 },
+      { posicion: "abr-27", usd: 201.9 }, { posicion: "jul-27", usd: 198.3 }, { posicion: "sep-27", usd: 202 },
+      { posicion: "dic-27", usd: 207.5 },
+    ],
+    ref_nueva: "abr-27",
+    evento_proximo: WASDE,
+  },
+  trigo: {
+    nombre: "Trigo",
+    estimativo: false,
+    historico: [ { f: "2026-09-21", usd: 229.9 }, { f: "2026-10-05", usd: 225 } ],
+    anio_anterior_usd: 189, // contado BCR, sep-2025
+    contado_fuente: "CAC-BCR, pizarra 5-oct-2026",
+    futuros: [
+      { posicion: "nov-26", usd: 226.4 }, { posicion: "dic-26", usd: 226.6 }, { posicion: "ene-27", usd: 231.1 },
+      { posicion: "mar-27", usd: 238 },
+    ],
+    ref_nueva: "ene-27",
+    evento_proximo: "",
+  },
+  girasol: {
+    nombre: "Girasol",
+    estimativo: true,
+    historico: [ { f: "2026-10-05", usd: 505 } ],
+    anio_anterior_usd: null,
+    contado_fuente: "CAC-BCR, pizarra 5-oct-2026",
+    futuros: [],
+    ref_nueva: null,
+    evento_proximo: "",
+  },
+};
+
+/* Calendario agrícola: rangos generales de Argentina. ini/fin = meses (1-12) en que
+   se cosecha. Varían según zona y fecha de siembra: por eso el productor elige. */
+const CALENDARIO = {
+  soja: {
+    texto: "La soja de 1ª se siembra de septiembre a noviembre y se cosecha de marzo a junio; la de 2ª se siembra de noviembre a enero y se cosecha de abril a julio.",
+    ventanas: [
+      { id: "mar-abr", nombre: "Marzo–abril", ini: 3, fin: 4 },
+      { id: "abr-may", nombre: "Abril–mayo", ini: 4, fin: 5 },
+      { id: "may-jun", nombre: "Mayo–junio (siembra tardía o soja de 2ª)", ini: 5, fin: 6 },
+    ],
+    defecto: "abr-may",
+  },
+  maiz: {
+    texto: "El maíz temprano se siembra en septiembre–octubre y el tardío en noviembre–diciembre; en general se cosecha de marzo a mayo.",
+    ventanas: [
+      { id: "mar-abr", nombre: "Marzo–abril", ini: 3, fin: 4 },
+      { id: "abr-may", nombre: "Abril–mayo", ini: 4, fin: 5 },
+    ],
+    defecto: "mar-abr",
+  },
+  trigo: {
+    texto: "El trigo es un cultivo de invierno: se siembra de marzo/mayo a agosto y se cosecha de noviembre a enero (el de esta campaña ya está sembrado).",
+    ventanas: [
+      { id: "nov-dic", nombre: "Noviembre–diciembre", ini: 11, fin: 12 },
+      { id: "dic-ene", nombre: "Diciembre–enero", ini: 12, fin: 1 },
+    ],
+    defecto: "nov-dic",
+  },
+  girasol: {
+    texto: "El girasol se siembra de septiembre a diciembre y se cosecha de marzo a mayo.",
+    ventanas: [ { id: "mar-may", nombre: "Marzo–mayo", ini: 3, fin: 5 } ],
+    defecto: "mar-may",
+  },
+};
+
+/* ===================================================================== */
+
+// ---- helpers ----
+const fmt = (n, d = 2) => Number(n).toLocaleString("es-AR", { minimumFractionDigits: 0, maximumFractionDigits: d });
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const fmtFecha = iso => { const p = iso.split("-"); return `${parseInt(p[2], 10)}-${MESES[parseInt(p[1], 10) - 1]}`; };
+const dias = (a, b) => Math.round((new Date(b) - new Date(a)) / 86400000);
+const pct = (a, b) => ((a - b) / b) * 100;
+const fmtPct = p => `${p > 0 ? "+" : ""}${fmt(p, Math.abs(p) < 0.1 ? 2 : 1)}%`;
+const signo = n => (n >= 0 ? "+" : "");
+
+// meses como índice absoluto (año*12 + mes0)
+const idxPos = pos => { const p = pos.split("-"); return (2000 + parseInt(p[1], 10)) * 12 + MESES.indexOf(p[0]); };
+const idxDatos = (() => { const p = FECHA_DATOS.split("-"); return parseInt(p[0], 10) * 12 + parseInt(p[1], 10) - 1; })();
+const nombreIdx = i => `${MESES[i % 12]}-${String(Math.floor(i / 12)).slice(2)}`;
+function proximoIdx(mes) { // próxima vez que llega el mes (1-12), desde el mes de los datos
+  const y0 = Math.floor(idxDatos / 12), m0 = idxDatos % 12, m = mes - 1;
+  return (m >= m0 ? y0 : y0 + 1) * 12 + m;
+}
+function resolverVentana(v) {
+  const ini = proximoIdx(v.ini);
+  return { id: v.id, nombre: v.nombre, ini, fin: ini + ((v.fin - v.ini + 12) % 12) };
+}
+function ventanaDe(cultivoKey, id) {
+  const cal = CALENDARIO[cultivoKey];
+  const v = cal.ventanas.find(x => x.id === id) || cal.ventanas.find(x => x.id === cal.defecto) || cal.ventanas[0];
+  return resolverVentana(v);
+}
+const textoVentana = v => `${nombreIdx(v.ini)} a ${nombreIdx(v.fin)}`;
+
+// ---- precio de hoy y referencia (observaciones previas dentro de los últimos 30 días) ----
+Object.keys(MERCADO).forEach(key => {
+  const c = MERCADO[key];
+  const ult = c.historico[c.historico.length - 1];
+  c.precio_hoy_usd = ult.usd;
+  c.fecha_hoy = ult.f;
+  const previos = c.historico.slice(0, -1).filter(p => dias(p.f, ult.f) <= 30);
+  c.ref = previos.length
+    ? { usd: previos.reduce((s, p) => s + p.usd, 0) / previos.length, n: previos.length, desde: previos[0].f, hasta: previos[previos.length - 1].f }
+    : null;
+});
+
+function textoReferencia(c) {
+  if (!c.ref) return "";
+  if (c.ref.n === 1) return `la pizarra del ${fmtFecha(c.ref.desde)}`;
+  return `el promedio de la pizarra entre el ${fmtFecha(c.ref.desde)} y el ${fmtFecha(c.ref.hasta)} (${c.ref.n} observaciones)`;
+}
+
+function armarContexto() {
+  const claves = Object.keys(MERCADO).filter(k => !MERCADO[k].estimativo);
+  const fecha = MERCADO[claves[0]].fecha_hoy;
+  const precios = claves.map(k => `${MERCADO[k].nombre.toLowerCase()} a US$ ${fmt(MERCADO[k].precio_hoy_usd)}/t`).join(", ");
+  let txt = `La pizarra física de Rosario del ${fmtFecha(fecha)} mostró ${precios}.`;
+  const girasol = Object.keys(MERCADO).filter(k => MERCADO[k].estimativo);
+  if (girasol.length) txt += ` El ${girasol.map(k => MERCADO[k].nombre.toLowerCase()).join(" y ")} figura con un valor estimativo de US$ ${fmt(MERCADO[girasol[0]].precio_hoy_usd)}/t, sin cotización firme.`;
+  const conRef = claves.filter(k => MERCADO[k].ref);
+  if (conRef.length) {
+    const refTxt = conRef.map(k => `${MERCADO[k].nombre.toLowerCase()} ${fmtPct(pct(MERCADO[k].precio_hoy_usd, MERCADO[k].ref.usd))}`).join(", ");
+    txt += ` Respecto de ${textoReferencia(MERCADO[conRef[0]])}: ${refTxt}.`;
+    if (conRef.every(k => MERCADO[k].precio_hoy_usd < MERCADO[k].ref.usd)) txt += " Los tres cultivos vienen cediendo.";
+  }
+  const fut = claves.filter(k => MERCADO[k].ref_nueva).map(k => {
+    const c = MERCADO[k];
+    const f = c.futuros.find(x => x.posicion === c.ref_nueva);
+    return f ? `${c.nombre.toLowerCase()} ${f.posicion} US$ ${fmt(f.usd)}/t (${fmtPct(pct(f.usd, c.precio_hoy_usd))} vs. el contado de hoy)` : null;
+  }).filter(Boolean);
+  if (fut.length) txt += ` En A3, los vencimientos que cubren la cosecha de esta campaña cotizan así: ${fut.join("; ")}. La soja y el maíz se cosechan desde marzo; el trigo, entre noviembre y enero.`;
+  return txt;
+}
+
+document.getElementById("updatedLabel").textContent = "Actualizado: " + ACTUALIZADO;
+document.getElementById("footUpdated").textContent = "Actualizado el " + ACTUALIZADO;
+document.getElementById("contextoTexto").textContent = armarContexto();
+
+// ---- pizarra ----
+const pizarraEl = document.getElementById("pizarra");
+Object.keys(MERCADO).forEach(key => {
+  const c = MERCADO[key];
+
+  let deltaHtml = `<div class="pizarra-delta">sin comparación previa</div>`;
+  if (c.ref && !c.estimativo) {
+    const d = pct(c.precio_hoy_usd, c.ref.usd);
+    deltaHtml = `<div class="pizarra-delta ${d > 0 ? "up" : (d < 0 ? "down" : "")}">${fmtPct(d)} vs. pizarra del ${fmtFecha(c.ref.desde)}</div>`;
+  }
+
+  let anioHtml = `<div class="pizarra-year">vs. hace un año: sin dato confirmado</div>`;
+  if (c.anio_anterior_usd) {
+    const yoyPct = pct(c.precio_hoy_usd, c.anio_anterior_usd); // contado contra contado
+    anioHtml = `<div class="pizarra-year ${yoyPct > 0 ? "up" : (yoyPct < 0 ? "down" : "")}">${fmtPct(yoyPct)} vs. contado de sep-2025</div>`;
+  }
+
+  const item = document.createElement("div");
+  item.className = "pizarra-item";
+  item.innerHTML = `
+    <div class="pizarra-name">${c.nombre.toUpperCase()}</div>
+    <div class="pizarra-price">US$ ${fmt(c.precio_hoy_usd)}${c.estimativo ? " (E)" : ""}</div>
+    ${deltaHtml}
+    ${anioHtml}
+    <div class="pizarra-year">${c.estimativo ? "estimativo, sin cotización firme" : "pizarra Rosario, " + fmtFecha(c.fecha_hoy)}</div>
+  `;
+  pizarraEl.appendChild(item);
+});
+
+// ---- selector de cultivo ----
+const cultivoSelect = document.getElementById("cultivo");
+Object.keys(MERCADO).forEach(key => {
+  const opt = document.createElement("option");
+  opt.value = key;
+  opt.textContent = MERCADO[key].nombre;
+  cultivoSelect.appendChild(opt);
+});
+
+// ---- selector de época de cosecha (solo si la mercadería sigue en el campo) ----
+const estadoSelect = document.getElementById("estado");
+const ventanaSelect = document.getElementById("ventana");
+function actualizarVentanas(idPreferido) {
+  const key = cultivoSelect.value;
+  const cal = CALENDARIO[key];
+  ventanaSelect.innerHTML = "";
+  cal.ventanas.forEach(v => {
+    const o = document.createElement("option");
+    o.value = v.id;
+    o.textContent = v.nombre;
+    ventanaSelect.appendChild(o);
+  });
+  ventanaSelect.value = cal.ventanas.some(v => v.id === idPreferido) ? idPreferido : cal.defecto;
+  document.getElementById("calendarioHint").textContent = cal.texto + " Son rangos generales del país: elegí el que mejor se parezca a tu zona y a tu fecha de siembra.";
+  const mostrar = estadoSelect.value === "campo" && MERCADO[key].futuros.length > 0;
+  document.getElementById("ventanaWrap").style.display = mostrar ? "block" : "none";
+}
+cultivoSelect.addEventListener("change", () => actualizarVentanas());
+estadoSelect.addEventListener("change", () => actualizarVentanas(ventanaSelect.value));
+
+// ---- localStorage: cargar datos guardados del productor ----
+const STORAGE_KEY = "vendo-o-guardo:productor";
+function cargarGuardado() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+function guardar(data) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {}
+}
+
+const guardado = cargarGuardado();
+if (guardado) {
+  if (guardado.cultivo && MERCADO[guardado.cultivo]) cultivoSelect.value = guardado.cultivo;
+  if (guardado.estado) estadoSelect.value = guardado.estado;
+  if (guardado.disponible != null) document.getElementById("disponible").value = guardado.disponible;
+  if (guardado.comprometido != null) document.getElementById("comprometido").value = guardado.comprometido;
+  if (guardado.objetivo != null) document.getElementById("objetivo").value = guardado.objetivo;
+  document.getElementById("savedNote").style.display = "block";
+}
+actualizarVentanas(guardado ? guardado.ventana : null);
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  document.getElementById("disponible").value = "";
+  document.getElementById("comprometido").value = "";
+  document.getElementById("objetivo").value = "";
+  document.getElementById("savedNote").style.display = "none";
+});
+
+// ---- instrumentos disponibles según estado de la mercadería y época de cosecha ----
+function listarInstrumentos(c, estado, vent) {
+  const lista = [];
+  lista.push({
+    tipo: "contado", nombre: "Contado", precio: c.precio_hoy_usd,
+    detalle: c.estimativo ? "valor estimativo, sin cotización firme" : "venta inmediata, cobrás ahora",
+    corto: "contado hoy", fuente: c.contado_fuente,
+    viable: estado === "cosechada", estimativo: c.estimativo,
+  });
+
+  const futs = c.futuros
+    .map(f => ({ f, i: idxPos(f.posicion) }))
+    .filter(x => x.i >= idxDatos && x.i <= idxDatos + MAX_MESES)
+    .sort((a, b) => a.i - b.i);
+
+  if (!futs.length) {
+    lista.push({ tipo: "futuro", nombre: "Futuro", precio: null, detalle: "sin cotización en US$ disponible", viable: false, sinPrecio: true });
+  } else {
+    const antes = estado === "campo" && vent ? futs.filter(x => x.i < vent.ini) : [];
+    if (antes.length) {
+      const a = antes[0].f.posicion, b = antes[antes.length - 1].f.posicion;
+      lista.push({
+        tipo: "futuro-antes", nombre: a === b ? `Futuro ${a}` : `Futuros ${a} a ${b}`, precio: null, viable: false, sinPrecio: true,
+        detalle: `vencen antes de tu cosecha (${vent.nombre.toLowerCase()}): no sirven para cubrir mercadería que todavía no tenés`,
+      });
+    }
+    futs.filter(x => !antes.includes(x)).forEach(x => {
+      const f = x.f;
+      const dif = f.usd - c.precio_hoy_usd;
+      let detalle = `${signo(dif)}${fmt(dif)} US$/t (${fmtPct(pct(f.usd, c.precio_hoy_usd))}) vs. contado de hoy`;
+      if (estado === "campo" && vent) {
+        detalle = (x.i < vent.fin ? "vence durante tu cosecha: cubre solo una parte; " : (x.i === vent.fin ? "vence en el último mes de tu cosecha; " : "vence después de tu cosecha; ")) + detalle;
+      }
+      lista.push({
+        tipo: "futuro", nombre: `Futuro ${f.posicion}`, precio: f.usd, posicion: f.posicion, idx: x.i,
+        detalle, corto: `futuro ${f.posicion}`, fuente: FUENTE_FUTUROS, viable: true,
+        despuesCosecha: estado === "campo" && vent ? x.i >= vent.fin : true,
+      });
+    });
+  }
+
+  lista.push({ tipo: "forward", nombre: "Forward", precio: null, detalle: "se negocia caso a caso: pedile precio a tu comprador o corredor", viable: false, sinPrecio: true });
+  return lista;
+}
+
+// ---- motor de recomendación (reglas simples) ----
+function recomendar(c, disponible, comprometido, objetivo, estado, vent) {
+  const restante = disponible - comprometido;
+  const pctVendido = (comprometido / disponible) * 100;
+  const instrumentos = listarInstrumentos(c, estado, vent);
+  const viables = instrumentos.filter(i => i.viable);
+  let elegido = viables.find(i => i.tipo === "contado")
+    || viables.find(i => i.tipo === "futuro" && i.despuesCosecha)
+    || viables.filter(i => i.tipo === "futuro").slice(-1)[0]
+    || null;
+  const reasons = [];
+  let action = null;
+  let pctSugerido = null;
+
+  const cerrar = () => ({ action, reasons, pctSugerido, pctVendido, restante, elegido, instrumentos,
+    tSugeridas: pctSugerido ? Math.min(Math.round(disponible * pctSugerido / 100), restante) : null });
+
+  if (restante <= 0) {
+    action = "completo";
+    reasons.push("Ya tenés comprometida toda la mercadería disponible: no queda nada por decidir.");
+    return cerrar();
+  }
+
+  if (estado === "campo") {
+    reasons.push("Como todavía no cosechaste, el contado no está disponible — la forma de asegurar precio ahora es un futuro de cosecha nueva (o un forward que negocies con tu comprador).");
+    if (vent && c.futuros.length) {
+      const antes = instrumentos.find(i => i.tipo === "futuro-antes");
+      if (antes) reasons.push(`Elegiste cosechar en ${vent.nombre.toLowerCase()} (${textoVentana(vent)}): los futuros anteriores vencen antes de que tengas la mercadería, así que no se usan para cubrir.`);
+    }
+  }
+
+  // sin precio firme para operar (girasol u otro cultivo sin cotización)
+  if (!elegido || elegido.estimativo) {
+    action = "consultar";
+    if (elegido) {
+      reasons.push(`El precio de ${c.nombre.toLowerCase()} es estimativo (E): no hay operaciones que lo respalden, así que no es una base firme para decidir.`);
+      reasons.push("Pedí un precio firme a tu comprador o corredor (contado o forward) antes de vender.");
+    } else {
+      reasons.push(`No hay cotización pública en US$ para fijar el precio de ${c.nombre.toLowerCase()} hoy.`);
+      reasons.push("Consultá un forward con tu comprador o corredor.");
+    }
+    if (c.evento_proximo) reasons.push(c.evento_proximo);
+    return cerrar();
+  }
+
+  // 1) precio objetivo
+  if (objetivo) {
+    const alcanzan = viables.filter(i => i.precio >= objetivo && !i.estimativo);
+    if (alcanzan.length) {
+      elegido = alcanzan.find(i => i.tipo === "contado") || alcanzan.find(i => i.despuesCosecha) || alcanzan[0];
+      action = "vender";
+      reasons.push(`Con ${elegido.nombre.toLowerCase()} (US$ ${fmt(elegido.precio)}/t) ya alcanzás tu objetivo de US$ ${fmt(objetivo)}/t.`);
+    } else {
+      const maxP = Math.max(...viables.map(i => i.precio));
+      reasons.push(`Tu objetivo de US$ ${fmt(objetivo)}/t está ${fmt(pct(objetivo, maxP), 1)}% por encima del mejor precio disponible hoy (US$ ${fmt(maxP)}/t).`);
+    }
+  }
+
+  // 2) reglas por avance de ventas y por precio contra la referencia
+  if (!action) {
+    if (pctVendido >= 70) {
+      action = "esperar";
+      reasons.push(`Ya tenés comprometido el ${fmt(pctVendido, 0)}% de lo disponible — no hay apuro por el resto.`);
+    } else if (c.ref) {
+      const diff = pct(c.precio_hoy_usd, c.ref.usd);
+      const cmp = textoReferencia(c);
+      if (diff > 3) {
+        action = "vender";
+        pctSugerido = pctVendido < 20 ? 30 : 20;
+        reasons.push(`El precio está ${fmt(diff, 1)}% arriba de ${cmp} — buen momento para asegurar parte de la cosecha.`);
+        reasons.push(`Llevás comprometido el ${fmt(pctVendido, 0)}% de lo disponible, así que todavía tenés margen para vender sin quedarte sin stock.`);
+      } else if (diff < -3) {
+        action = "esperar";
+        reasons.push(`El precio está ${fmt(Math.abs(diff), 1)}% por debajo de ${cmp} — no parece el mejor momento para soltar el resto.`);
+      } else {
+        action = pctVendido < 30 ? "vender" : "esperar";
+        reasons.push(`El precio está estable (${fmtPct(diff)} vs. ${cmp}).`);
+        if (action === "vender") {
+          pctSugerido = 20;
+          reasons.push(`Como llevás vendido solo el ${fmt(pctVendido, 0)}%, conviene ir asegurando de a poco.`);
+        }
+      }
+    } else {
+      action = pctVendido < 30 ? "vender" : "esperar";
+      reasons.push("Todavía no hay historial suficiente para comparar el precio de hoy; la recomendación se basa solo en cuánto llevás vendido.");
+      if (action === "vender") pctSugerido = 20;
+    }
+  }
+
+  // 3) cobertura con futuro de cosecha nueva: qué vencimiento y cuánto paga
+  if (action === "vender" && estado === "campo" && elegido.tipo === "futuro") {
+    const dif = pct(elegido.precio, c.precio_hoy_usd);
+    const primero = viables.find(i => i.tipo === "futuro" && i.despuesCosecha);
+    const cosechaTxt = vent ? ` (${vent.nombre.toLowerCase()})` : "";
+    if (!primero) {
+      reasons.push(`Ningún vencimiento llega hasta el final de tu cosecha${cosechaTxt}: el más lejano es el ${elegido.nombre.toLowerCase()}, así que vas a tener que renovar la cobertura.`);
+    } else if (elegido === primero) {
+      reasons.push(`El ${elegido.nombre.toLowerCase()} es el primer vencimiento que llega hasta el final de tu cosecha${cosechaTxt}: así el contrato no vence antes de que tengas la mercadería.`);
+    } else {
+      reasons.push(`El ${elegido.nombre.toLowerCase()} llega hasta el final de tu cosecha${cosechaTxt} y alcanza tu objetivo; el primer vencimiento que la cubre es el ${primero.nombre.toLowerCase()} (US$ ${fmt(primero.precio)}/t).`);
+    }
+    reasons.push(dif < 0
+      ? `Cotiza ${fmt(Math.abs(dif), 1)}% por debajo del contado de hoy: el mercado paga más por entrega inmediata que por cosecha nueva. Es el precio al que podés asegurar hoy tu cosecha.`
+      : `Cotiza ${fmtPct(dif)} sobre el contado de hoy.`);
+  }
+
+  // 4) mercadería ya cosechada: lectura honesta de la curva (premio por esperar, no "mejor precio")
+  if (action === "vender" && elegido.tipo === "contado") {
+    const futs = viables.filter(i => i.tipo === "futuro");
+    const mejorFut = futs.length ? futs.reduce((a, b) => (b.precio > a.precio ? b : a)) : null;
+    if (mejorFut && mejorFut.precio > elegido.precio) {
+      let t = `Si podés esperar, el ${mejorFut.nombre.toLowerCase()} paga US$ ${fmt(mejorFut.precio - elegido.precio)}/t más (${fmtPct(pct(mejorFut.precio, elegido.precio))}) que el contado. Esa diferencia es lo que el mercado paga por esperar: comparala con tu costo de almacenaje y financiación antes de elegirlo.`;
+      const bajo = futs.find(i => i.idx > mejorFut.idx && i.precio < elegido.precio);
+      if (bajo) t += ` Desde ${bajo.posicion} los vencimientos cotizan por debajo del contado: esperar más allá de ${mejorFut.posicion} no tiene premio.`;
+      reasons.push(t);
+    } else if (futs.length) {
+      reasons.push("El mercado a futuro no paga más que el contado de hoy: no hay premio por esperar.");
+    }
+  }
+
+  if (c.evento_proximo) reasons.push(c.evento_proximo);
+
+  return cerrar();
+}
+
+// ---- UI: calcular y mostrar ----
+function mostrarError(msg) {
+  const e = document.getElementById("resultEmpty");
+  e.textContent = msg;
+  e.style.display = "block";
+  document.getElementById("resultCard").classList.remove("show");
+}
+
+document.getElementById("calcBtn").addEventListener("click", () => {
+  const cultivoKey = cultivoSelect.value;
+  const estado = estadoSelect.value;
+  const disponible = parseFloat(document.getElementById("disponible").value);
+  const comprometido = Math.max(0, parseFloat(document.getElementById("comprometido").value) || 0);
+  const objetivo = parseFloat(document.getElementById("objetivo").value) || null;
+  const ventId = ventanaSelect.value;
+
+  if (!disponible || disponible <= 0) {
+    mostrarError("Cargá primero cuántas toneladas tenés disponibles.");
+    return;
+  }
+  if (comprometido > disponible) {
+    mostrarError(`Las toneladas vendidas o comprometidas (${fmt(comprometido, 0)} t) no pueden superar a las disponibles (${fmt(disponible, 0)} t). Revisá los números.`);
+    return;
+  }
+
+  guardar({ cultivo: cultivoKey, estado, disponible, comprometido, objetivo, ventana: ventId });
+  document.getElementById("savedNote").style.display = "block";
+
+  const info = MERCADO[cultivoKey];
+  const vent = estado === "campo" ? ventanaDe(cultivoKey, ventId) : null;
+  const r = recomendar(info, disponible, comprometido, objetivo, estado, vent);
+
+  const verdictEl = document.getElementById("verdict");
+  const labelEl = document.getElementById("verdictLabel");
+  const subEl = document.getElementById("verdictSub");
+  verdictEl.className = "verdict " + r.action;
+
+  if (r.action === "vender") {
+    const accion = r.elegido.tipo === "contado" ? "Vender contado" : `Cubrir con ${r.elegido.nombre.toLowerCase()}`;
+    labelEl.textContent = r.pctSugerido ? `${accion} el ${r.pctSugerido}%` : accion;
+    const tons = r.tSugeridas ? ` · ≈ ${fmt(r.tSugeridas, 0)} t de ${fmt(disponible, 0)}` : ` · te quedan ${fmt(r.restante, 0)} t por decidir`;
+    subEl.textContent = `${info.nombre} · US$ ${fmt(r.elegido.precio)}/t (${r.elegido.corto})${tons}`;
+  } else if (r.action === "esperar") {
+    labelEl.textContent = "Esperar";
+    subEl.textContent = `${info.nombre} · US$ ${fmt(info.precio_hoy_usd)}/t pizarra hoy · te quedan ${fmt(r.restante, 0)} t por decidir`;
+  } else if (r.action === "consultar") {
+    labelEl.textContent = "Consultá un precio firme";
+    subEl.textContent = info.estimativo
+      ? `${info.nombre} · valor estimativo US$ ${fmt(info.precio_hoy_usd)}/t (E)`
+      : `${info.nombre} · sin cotización en US$ para fijar precio hoy`;
+  } else {
+    labelEl.textContent = "Nada por decidir";
+    subEl.textContent = `${info.nombre} · ${fmt(comprometido, 0)} de ${fmt(disponible, 0)} t comprometidas`;
+  }
+
+  const reasonsEl = document.getElementById("reasons");
+  reasonsEl.innerHTML = "";
+  r.reasons.forEach(txt => {
+    const li = document.createElement("li");
+    li.textContent = txt;
+    reasonsEl.appendChild(li);
+  });
+
+  const compareEl = document.getElementById("compareTable");
+  const rows = r.instrumentos.map(i => {
+    const recomendado = r.elegido && i.nombre === r.elegido.nombre && i.viable && r.action === "vender";
+    const cls = !i.viable ? "na" : (recomendado ? "best" : "");
+    let precioTexto, detalleTexto;
+    if (i.sinPrecio) {
+      precioTexto = i.tipo === "futuro-antes" ? "no sirven" : "sin cotización";
+      detalleTexto = i.detalle;
+    } else if (!i.viable) {
+      precioTexto = "no disponible";
+      detalleTexto = "cosechá primero, o fijalo con un futuro";
+    } else {
+      precioTexto = `US$ ${fmt(i.precio)}/t${i.estimativo ? " (E)" : ""}`;
+      detalleTexto = i.detalle;
+    }
+    const fuenteTexto = i.fuente && i.viable ? ` <span class="compare-fuente">(${i.fuente})</span>` : "";
+    const marca = recomendado ? " ← sugerido" : "";
+    return `<tr class="${cls}"><td>${i.nombre}</td><td>${precioTexto}</td><td>${detalleTexto}${fuenteTexto}${marca}</td></tr>`;
+  }).join("");
+  compareEl.innerHTML = `<tr><th>Instrumento</th><th>Precio</th><th>Detalle</th></tr>${rows}`;
+
+  document.getElementById("resultEmpty").style.display = "none";
+  document.getElementById("resultCard").classList.add("show");
+});
+
+// si hay datos guardados, mostrar el resultado de una
+if (guardado && guardado.disponible) {
+  document.getElementById("calcBtn").click();
+}
+</script>
+</body>
+</html>
+
+</body></html>
